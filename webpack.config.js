@@ -10,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
+  devtool: 'eval-cheap-source-map',
   node: {
     fs: 'empty',
   },
@@ -47,7 +48,7 @@ module.exports = {
         // 'scss',
         // 'less',
         //'javascript',
-        'typescript',
+        // 'typescript',
         // 'coffee',
         // 'python',
         // 'json',

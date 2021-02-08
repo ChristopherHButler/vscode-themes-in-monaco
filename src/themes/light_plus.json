@@ -2,7 +2,7 @@
 	"$schema": "vscode://schemas/color-theme",
 	"name": "Light+ (default light)",
 	"include": "./light_vs.json",
-	"tokenColors": [ // adds rules to the light vs rules
+	"tokenColors": [
 		{
 			"name": "Function declarations",
 			"scope": [
@@ -10,7 +10,7 @@
 				"support.function",
 				"support.constant.handlebars",
 				"source.powershell variable.other.member",
-				"entity.name.operator.custom-literal" // See https://en.cppreference.com/w/cpp/language/user_literal
+				"entity.name.operator.custom-literal"
 			],
 			"settings": {
 				"foreground": "#795E26"
@@ -104,7 +104,7 @@
 				"variable.other.enummember"
 			],
 			"settings": {
-				"foreground": "#0070C1",
+				"foreground": "#0070C1"
 			}
 		},
 		{
@@ -196,6 +196,6 @@
 		"newOperator": "#AF00DB",
 		"stringLiteral": "#a31515",
 		"customLiteral": "#795E26",
-		"numberLiteral": "#098658",
+		"numberLiteral": "#098658"
 	}
 }

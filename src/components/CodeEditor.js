@@ -5,17 +5,11 @@ import { convertTheme } from 'monaco-vscode-textmate-theme-converter/lib/cjs';
 import { Registry } from 'monaco-textmate';
 import { wireTmGrammars } from 'monaco-editor-textmate';
 
+import Select from './Select';
+
 import darkPlusTheme from '../themes/dark_plus.json';
+import lightPlusTheme from '../themes/light_plus.json';
 
-
-// const registry = new Registry({
-//   getGrammarDefinition: async (scopeName) => {
-//     return {
-//       format: 'json',
-//       content: await (await fetch(`./css.tmGrammar.json`)).text(),
-//     };
-//   },
-// });
 
 
 const registry = new Registry({
@@ -44,19 +38,40 @@ const CodeEditor = ({ setTheme }) => {
   const editorRef = useRef();
 
   const [value, setValue] = useState(
-// `
-// html, body {
-//   margin: 0;
-// }
-//   `
 `
-var abc = 123;
-abc++;
-console.log(abc);
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const App = () => {
+
+  function test() {
+    return;
+  }
+  test();
+
+  var abc = 123;
+  abc++;
+  console.log(abc);
+};
 `
 );
 
   const [darkPlus, setDarkPlus] = useState(null);
+
+  const [currentTheme, setCurrentTheme] = useState('');
+
+  const themeOptions = () => {
+    return (
+      <>
+        <option id="0">Dark+ (default dark)</option>
+        <option id="1">Light+ (default light)</option>
+      </>
+    );
+  }
+
+  const onThemeChange = (theme) => {
+    setCurrentTheme(theme);
+  };
 
   console.log('darkPlus: ', darkPlus);
 
@@ -71,31 +86,6 @@ console.log(abc);
     setTheme(theme);
   }, [setTheme]);
 
-  // useEffect(() => {
-  //   // console.log('running hook...');
-  //   if (darkPlus && monacoRef.current) {
-  //     // console.log('defining theme, theme: ', darkPlus);
-  //     // monacoRef.current.editor.defineTheme('dark-plus', darkPlus);
-
-  //     // liftOff(monacoRef.current).then(() => {
-  //     //   // monaco.editor.setModelLanguage(editor.getModel(), "c++");
-  //     //   monacoRef.current.editor.setTheme("dark-plus");
-  //     // });
-  //   }
-  // }, [darkPlus, monacoRef]);
-
-  const onButtonClick = () => {
-    if (darkPlus && monacoRef.current) {
-      console.log('defining theme, theme: ', darkPlus);
-      monacoRef.current.editor.defineTheme('dark-plus', darkPlus);
-
-      liftOff(monacoRef.current).then(() => {
-        console.log('setting theme...');
-        // monaco.editor.setModelLanguage(editor.getModel(), "c++");
-        monacoRef.current.editor.setTheme("dark-plus");
-      });
-    }
-  };
 
   const liftOff = async(monaco) => {
     // map of monaco "language id's" to TextMate scopeNames
@@ -108,7 +98,7 @@ console.log(abc);
     grammars.set('typescript', 'source.ts');
     grammars.set('javascript', 'source.js');
 
-    // monaco.languages.register({id: 'typescript'});
+    monaco.languages.register({id: 'typescript'});
     monaco.languages.register({id: 'javascript'});
 
     console.log('grammars set... wiring next');
@@ -116,19 +106,18 @@ console.log(abc);
     await wireTmGrammars(monaco, registry, grammars, editorRef.current);
   };
 
+  const onButtonClick = () => {
+    if (darkPlus && monacoRef.current) {
+      console.log('defining theme, theme: ', darkPlus);
+      monacoRef.current.editor.defineTheme('dark-plus', darkPlus);
 
-  // const onEditorMount = (editor, monaco) => {
-  //   monacoRef.current = monaco;
-  //   editorRef.current = editor;
+      liftOff(monacoRef.current).then(() => {
+        console.log('setting theme...');
+        monacoRef.current.editor.setTheme("dark-plus");
+      });
+    }
+  };
 
-  //   console.log('monacoRef.current: ', monacoRef.current);
-
-  //   // liftOff(monaco).then(() => {
-  //   //   // monaco.editor.setModelLanguage(editor.getModel(), "c++");
-  //   //   monaco.editor.setTheme("dark-plus");
-  //   // });
-
-  // };
 
   const onEditorDidMount = (editor, monaco) => {
     console.log('editor did mount');
@@ -136,33 +125,24 @@ console.log(abc);
     editorRef.current = editor;
   };
 
-  const onEditorDidChange = (newValue, e) => {
-    // console.log('editor changed');
-    setValue(newValue);
+  const onEditorChange = (value, event) => {
+    setValue(value);
   };
-
-
-
-  // const onEditorChange = (value, event) => {
-  //   console.log('on change called');
-  //   setValue(value);
-  // };
 
   return (
     <div id="monaco-container" style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '75%', border: '1px solid red' }}>
       <button onClick={() => onButtonClick()}>Set Theme</button>
-      {/* <Editor
-        value={value}
-        onMount={onEditorMount}
-        onChange={onEditorChange}
-        language="javascript"
-        height="100%"
-      /> */}
+      <Select
+        name="Theme Select"
+        options={themeOptions()}
+        value={currentTheme}
+        onChange={onThemeChange}
+      />
       <MonacoEditor
         value={value}
         editorDidMount={onEditorDidMount}
-        onChange={onEditorDidChange}
-        language="css"
+        onChange={onEditorChange}
+        language="javascript"
         height="100%"
       />
     </div>
