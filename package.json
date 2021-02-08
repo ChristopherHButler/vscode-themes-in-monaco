@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "core-js": "^3.6.5",
+    "file-loader": "^6.2.0",
     "monaco-editor-textmate": "^2.2.2",
     "monaco-textmate": "^3.0.1",
     "monaco-vscode-textmate-theme-converter": "^0.1.1",

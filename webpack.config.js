@@ -46,7 +46,7 @@ module.exports = {
         'css',
         // 'scss',
         // 'less',
-        // 'javascript',
+        //'javascript',
         'typescript',
         // 'coffee',
         // 'python',
@@ -66,6 +66,10 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.ttf$/,
+        use: ['file-loader']
+      }
     ]
   }
 };

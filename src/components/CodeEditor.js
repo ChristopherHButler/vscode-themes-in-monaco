@@ -8,25 +8,53 @@ import { wireTmGrammars } from 'monaco-editor-textmate';
 import darkPlusTheme from '../themes/dark_plus.json';
 
 
+// const registry = new Registry({
+//   getGrammarDefinition: async (scopeName) => {
+//     return {
+//       format: 'json',
+//       content: await (await fetch(`./css.tmGrammar.json`)).text(),
+//     };
+//   },
+// });
+
+
 const registry = new Registry({
   getGrammarDefinition: async (scopeName) => {
-    return {
-      format: 'json',
-      content: await (await fetch(`./css.tmGrammar.json`)).text(),
-    };
-  },
-});
+    console.log('scopeName: ', scopeName);
+    if(scopeName == 'source.ts'){
+      return {
+        format: 'json',
+        content: await (await fetch('./TypeScript.tmLanguage.json')).text()
+      }
+    } else if (scopeName == 'source.js'){
+      return {
+        format: 'json',
+        content: await (await fetch('./JavaScript.tmLanguage.json')).text()
+      }
+    } else {
+      return null;
+    }
+
+  }
+})
 
 
 const CodeEditor = ({ setTheme }) => {
   const monacoRef = useRef(null);
   const editorRef = useRef();
 
-  const [value, setValue] = useState(`
-html, body {
-  margin: 0;
-}
-  `);
+  const [value, setValue] = useState(
+// `
+// html, body {
+//   margin: 0;
+// }
+//   `
+`
+var abc = 123;
+abc++;
+console.log(abc);
+`
+);
 
   const [darkPlus, setDarkPlus] = useState(null);
 
@@ -73,13 +101,19 @@ html, body {
     // map of monaco "language id's" to TextMate scopeNames
     const grammars = new Map();
 
-    grammars.set('css', 'source.css');
-    grammars.set('html', 'text.html.basic');
+    // grammars.set('css', 'source.css');
+    // grammars.set('html', 'text.html.basic');
+    // grammars.set('typescript', 'source.ts');
+
     grammars.set('typescript', 'source.ts');
+    grammars.set('javascript', 'source.js');
+
+    // monaco.languages.register({id: 'typescript'});
+    monaco.languages.register({id: 'javascript'});
 
     console.log('grammars set... wiring next');
 
-    await wireTmGrammars(monaco, registry, grammars);
+    await wireTmGrammars(monaco, registry, grammars, editorRef.current);
   };
 
 
