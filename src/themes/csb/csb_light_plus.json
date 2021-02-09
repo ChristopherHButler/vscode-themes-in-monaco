@@ -1,19 +1,31 @@
 {
 	"$schema": "vscode://schemas/color-theme",
-	"name": "Dark+ (default dark)",
-	"include": "./dark_vs.json",
+	"name": "Light+ (default light)",
+	"colors": {
+		"editor.background": "#FFFFFF",
+		"editor.foreground": "#000000",
+		"editor.inactiveSelectionBackground": "#E5EBF1",
+		"editorIndentGuide.background": "#D3D3D3",
+		"editorIndentGuide.activeBackground": "#939393",
+		"editor.selectionHighlightBackground": "#ADD6FF80",
+		"editorSuggestWidget.background": "#F3F3F3",
+		"activityBarBadge.background": "#007ACC",
+		"sideBarTitle.foreground": "#6F6F6F",
+		"list.hoverBackground": "#E8E8E8",
+		"input.placeholderForeground": "#767676",
+		"settings.textInputBorder": "#CECECE",
+		"settings.numberInputBorder": "#CECECE"
+	},
 	"tokenColors": [
 		{
 			"name": "Function declarations",
 			"scope": [
 				"entity.name.function",
 				"support.function",
-				"support.constant.handlebars",
-				"source.powershell variable.other.member",
-				"entity.name.operator.custom-literal"
+				"support.constant.handlebars"
 			],
 			"settings": {
-				"foreground": "#DCDCAA"
+				"foreground": "#795E26"
 			}
 		},
 		{
@@ -23,9 +35,6 @@
 				"support.class",
 				"support.type",
 				"entity.name.type",
-				"entity.name.namespace",
-				"entity.other.attribute",
-				"entity.name.scope-resolution",
 				"entity.name.class",
 				"storage.type.numeric.go",
 				"storage.type.byte.go",
@@ -54,7 +63,7 @@
 				"storage.type.primitive.groovy"
 			],
 			"settings": {
-				"foreground": "#4EC9B0"
+				"foreground": "#267f99"
 			}
 		},
 		{
@@ -68,21 +77,14 @@
 				"entity.other.inherited-class"
 			],
 			"settings": {
-				"foreground": "#4EC9B0"
+				"foreground": "#267f99"
 			}
 		},
 		{
-			"name": "Control flow / Special keywords",
-			"scope": [
-				"keyword.control",
-				"source.cpp keyword.operator.new",
-				"keyword.operator.delete",
-				"keyword.other.using",
-				"keyword.other.operator",
-				"entity.name.operator"
-			],
+			"name": "Control flow keywords",
+			"scope": "keyword.control",
 			"settings": {
-				"foreground": "#C586C0"
+				"foreground": "#AF00DB"
 			}
 		},
 		{
@@ -94,17 +96,7 @@
 				"entity.name.variable"
 			],
 			"settings": {
-				"foreground": "#9CDCFE"
-			}
-		},
-		{
-			"name": "Constants and enums",
-			"scope": [
-				"variable.other.constant",
-				"variable.other.enummember"
-			],
-			"settings": {
-				"foreground": "#4FC1FF"
+				"foreground": "#001080"
 			}
 		},
 		{
@@ -113,7 +105,7 @@
 				"meta.object-literal.key"
 			],
 			"settings": {
-				"foreground": "#9CDCFE"
+				"foreground": "#001080"
 			}
 		},
 		{
@@ -128,7 +120,7 @@
 				"support.constant.color"
 			],
 			"settings": {
-				"foreground": "#CE9178"
+				"foreground": "#0451a5"
 			}
 		},
 		{
@@ -143,7 +135,7 @@
 				"support.other.parenthesis.regexp"
 			],
 			"settings": {
-				"foreground": "#CE9178"
+				"foreground": "#d16969"
 			}
 		},
 		{
@@ -154,7 +146,13 @@
 				"constant.character.set.regexp"
 			],
 			"settings": {
-				"foreground": "#d16969"
+				"foreground": "#811f3f"
+			}
+		},
+		{
+			"scope": "keyword.operator.quantifier.regexp",
+			"settings": {
+				"foreground": "#000000"
 			}
 		},
 		{
@@ -163,56 +161,21 @@
 				"keyword.control.anchor.regexp"
 			],
 			"settings": {
-				"foreground": "#DCDCAA"
-			}
-		},
-		{
-			"scope": "keyword.operator.quantifier.regexp",
-			"settings": {
-				"foreground": "#d7ba7d"
+				"foreground": "#ff0000"
 			}
 		},
 		{
 			"scope": "constant.character",
 			"settings": {
-				"foreground": "#569cd6"
+				"foreground": "#0000ff"
 			}
 		},
 		{
 			"scope": "constant.character.escape",
 			"settings": {
-				"foreground": "#d7ba7d"
-			}
-		},
-		{
-			"scope": "entity.name.label",
-			"settings": {
-				"foreground": "#C8C8C8"
-			}
-		},
-		{
-			"scope": "constant.language",
-			"settings": {
-				"foreground": "#569CD6"
-			}
-		},
-		{
-			"scope": "entity.name.tag",
-			"settings": {
-				"foreground": "#569CD6"
-			}
-		},
-		{
-			"scope": "storage",
-			"settings": {
-				"foreground": "#569cd6"
+				"foreground": "#ff0000"
 			}
 		}
-	],
-	"semanticTokenColors": {
-		"newOperator":"#C586C0",
-		"stringLiteral":"#ce9178",
-		"customLiteral": "#DCDCAA",
-		"numberLiteral": "#b5cea8"
-	}
+
+	]
 }

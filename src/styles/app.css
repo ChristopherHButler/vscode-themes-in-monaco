@@ -1,11 +1,34 @@
 
-.container {
+body {
+  padding: 0px 15px;
+  margin: 10px;
+}
+
+.column {
   display: flex;
   flex-direction: column;
-  height: 75vh;
+  justify-content: flex-start;
+
+  height: 98vh;
+  width: 100%;
 }
 
 .row {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+
+  height: 100%;
+  width: 100%;
+}
+
+
+.panel {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  width: 100%;
+
+  margin: 0px 15px;
 }

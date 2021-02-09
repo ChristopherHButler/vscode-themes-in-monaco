@@ -1,34 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Select from './Select';
-import { Themes } from '../constants';
 
-const ThemeSelector = ({ theme, setTheme, disabled }) => {
 
-  const themeOptions = (
-    <>
-      <option id="0">Select Theme</option>
-      <option id="1">{Themes.DARK_PLUS.display}</option>
-      <option id="2">{Themes.LIGHT_PLUS.display}</option>
-    </>
-  );
+
+const ThemeSelector = ({ themes, theme, setTheme, disabled }) => {
+
+  const getThemeOptions = () => {
+    const options = themes.map((t, idx) => {
+      return (
+        <option key={t.id} id={idx + 1}>{t.name}</option>
+      );
+    });
+    return (
+      <>
+        <option id="0">Select Theme</option>
+        {options}
+      </>
+    );
+  };
 
   const onThemeChange = (newThemeName) => {
 
-    switch (newThemeName) {
-      case Themes.DARK_PLUS.display:
-        setTheme({ id: Themes.DARK_PLUS.value, name: Themes.DARK_PLUS.display });
-        return;
-      case Themes.LIGHT_PLUS.display:
-        setTheme({ id: Themes.LIGHT_PLUS.value, name: Themes.LIGHT_PLUS.display });
-        return;
-    }
+    const newTheme = themes.find(theme => theme.name === newThemeName);
+
+    setTheme(newTheme);
   };
 
   return (
     <Select
       name="Theme Select"
-      options={themeOptions}
+      options={getThemeOptions()}
       value={theme.name}
       onChange={(newThemeName) => onThemeChange(newThemeName)}
       disabled={disabled}
