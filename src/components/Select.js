@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Select = ({ name, options, value, onChange }) => {
+const Select = ({ name, options, value, onChange, disabled }) => {
   return (
-    <select name={name} value={value} onChange={(event) => onChange(event.target.value)} >
+    <select name={name} disabled={disabled} value={value} onChange={(event) => onChange(event.target.value)} >
       {options}
     </select>
   );

@@ -5,7 +5,8 @@ import { convertTheme } from 'monaco-vscode-textmate-theme-converter/lib/cjs';
 import { Registry } from 'monaco-textmate';
 import { wireTmGrammars } from 'monaco-editor-textmate';
 
-import Select from './Select';
+import { sampleCode } from '../helpers/data';
+import { Themes } from '../constants';
 
 import darkPlusTheme from '../themes/dark_plus.json';
 import lightPlusTheme from '../themes/light_plus.json';
@@ -14,7 +15,6 @@ import lightPlusTheme from '../themes/light_plus.json';
 
 const registry = new Registry({
   getGrammarDefinition: async (scopeName) => {
-    console.log('scopeName: ', scopeName);
     if(scopeName == 'source.ts'){
       return {
         format: 'json',
@@ -33,58 +33,41 @@ const registry = new Registry({
 })
 
 
-const CodeEditor = ({ setTheme }) => {
+const CodeEditor = ({ selectedTheme, setThemeData, setThemesConverted }) => {
   const monacoRef = useRef(null);
   const editorRef = useRef();
 
-  const [value, setValue] = useState(
-`
-import React from 'react';
-import ReactDOM from 'react-dom';
+  // code in editor
+  const [value, setValue] = useState(sampleCode);
 
-const App = () => {
+  // the converted themes
+  const [themes, setThemes] = useState([]);
 
-  function test() {
-    return;
-  }
-  test();
-
-  var abc = 123;
-  abc++;
-  console.log(abc);
-};
-`
-);
-
-  const [darkPlus, setDarkPlus] = useState(null);
-
-  const [currentTheme, setCurrentTheme] = useState('');
-
-  const themeOptions = () => {
-    return (
-      <>
-        <option id="0">Dark+ (default dark)</option>
-        <option id="1">Light+ (default light)</option>
-      </>
-    );
-  }
-
-  const onThemeChange = (theme) => {
-    setCurrentTheme(theme);
-  };
-
-  console.log('darkPlus: ', darkPlus);
-
+  // initialize all themes. Ideally move this out but I want to keep it simple for now.
   useEffect(() => {
-    const theme = {
-      ...convertTheme(darkPlusTheme),
-      inherit: true,
-    };
+    const dpt = { ...convertTheme(darkPlusTheme), inherit: true };
+    const lpt = { ...convertTheme(lightPlusTheme), inherit: true };
+    setThemes([
+      { id: Themes.DARK_PLUS.value, theme: dpt},
+      { id: Themes.LIGHT_PLUS.value, theme: lpt }
+    ]);
+    setThemesConverted(true);
+  }, []);
 
-    setDarkPlus(theme);
-    // hook to get access to theme
-    setTheme(theme);
-  }, [setTheme]);
+  // update the current theme
+  useEffect(() => {
+    if (monacoRef.current && themes.length > 0) {
+
+      const theme = themes.find(t => t.id === selectedTheme.id);
+
+      monacoRef.current.editor.defineTheme('custom-theme', theme.theme);
+
+      liftOff(monacoRef.current).then(() => monacoRef.current.editor.setTheme('custom-theme'));
+
+      // this is to be able to download the theme as json
+      setThemeData(theme.theme);
+    }
+  }, [selectedTheme]);
 
 
   const liftOff = async(monaco) => {
@@ -101,43 +84,24 @@ const App = () => {
     monaco.languages.register({id: 'typescript'});
     monaco.languages.register({id: 'javascript'});
 
-    console.log('grammars set... wiring next');
-
     await wireTmGrammars(monaco, registry, grammars, editorRef.current);
-  };
-
-  const onButtonClick = () => {
-    if (darkPlus && monacoRef.current) {
-      console.log('defining theme, theme: ', darkPlus);
-      monacoRef.current.editor.defineTheme('dark-plus', darkPlus);
-
-      liftOff(monacoRef.current).then(() => {
-        console.log('setting theme...');
-        monacoRef.current.editor.setTheme("dark-plus");
-      });
-    }
   };
 
 
   const onEditorDidMount = (editor, monaco) => {
-    console.log('editor did mount');
+    // console.log('editor did mount');
     monacoRef.current = monaco;
     editorRef.current = editor;
   };
+
 
   const onEditorChange = (value, event) => {
     setValue(value);
   };
 
+
   return (
     <div id="monaco-container" style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '75%', border: '1px solid red' }}>
-      <button onClick={() => onButtonClick()}>Set Theme</button>
-      <Select
-        name="Theme Select"
-        options={themeOptions()}
-        value={currentTheme}
-        onChange={onThemeChange}
-      />
       <MonacoEditor
         value={value}
         editorDidMount={onEditorDidMount}
