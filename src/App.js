@@ -70,11 +70,10 @@ const App = () => {
         </p>
         <p style={{ margin: '5px' }}>
           Disclaimer: I know the UI looks like shit. This was meant to be a a POC but at some point I realized someone might actually want to use it.
-          I will re-write this and do a proper job.
         </p>
         <p style={{ margin: '5px' }}>
           Actual Disclaimer: There is no effort put into error handling at the moment so probably a good idea to run this with the console open.
-          Also, there ARE bugs. Some thigns don't work. It is what it is right now o_0
+          Also, there ARE bugs. Some things don't work. It is what it is and I don't have time to rewrite. enjoy!
         </p>
       </div>
     </div>

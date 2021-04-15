@@ -91,3 +91,6 @@ So then going back to monaco-editor-textmate...
  6. install monaco-editor-webpack-plugin
 
 
+
+This issue was helpful: [https://github.com/NeekSandhu/monaco-editor-textmate/issues/14](https://github.com/NeekSandhu/monaco-editor-textmate/issues/14)
+
