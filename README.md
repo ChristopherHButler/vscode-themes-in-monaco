@@ -3,7 +3,7 @@
 POC App to get vscode themes working in Monaco
 
 
-## Procedure to Reporduce
+## Procedure to Reproduce
 
 ### Notes
 
