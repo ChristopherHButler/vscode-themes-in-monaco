@@ -94,3 +94,6 @@ So then going back to monaco-editor-textmate...
 
 This issue was helpful: [https://github.com/NeekSandhu/monaco-editor-textmate/issues/14](https://github.com/NeekSandhu/monaco-editor-textmate/issues/14)
 
+## Project
+
+To see this in action in a real project checkout [contrived](https://contrived.herokuapp.com/)
