@@ -39,7 +39,7 @@ new MonacoWebpackPlugin({
 ```
 
  - The code of interest is in the CodeEditor component.
- - Themes are taken from vscode [vscode](https://github.com/microsoft/vscode/tree/master/extensions/theme-defaults)
+ - Themes are taken from [vscode](https://github.com/microsoft/vscode/tree/master/extensions/theme-defaults)
    - Note: some modifications are required here.
  - grammar files are taken from [vscode-textmate](https://github.com/microsoft/vscode-textmate)
 
@@ -96,4 +96,4 @@ This issue was helpful: [https://github.com/NeekSandhu/monaco-editor-textmate/is
 
 ## Project
 
-To see this in action in a real project checkout [contrived](https://contrived.herokuapp.com/)
+To see this in action in a real project checkout [contrived](https://contrived.dev/)
