@@ -59,6 +59,8 @@ const CodeEditor = ({ themes, setThemes, selectedTheme, setThemeData, setThemesC
 
   // initialize all themes. Ideally move this out but I want to keep it simple for now.
   useEffect(() => {
+    const lightTheme = { ...convertTheme(lightPlusTheme), inherit: true };
+    lightTheme.base = 'vs';
     setThemes([
       // working!
       { 
@@ -67,11 +69,11 @@ const CodeEditor = ({ themes, setThemes, selectedTheme, setThemeData, setThemesC
         theme: { ...convertTheme(darkPlusTheme), inherit: true, }
       },
       // not working
-      // { 
-      //   id: Themes.LIGHT_PLUS.value,
-      //   name: Themes.LIGHT_PLUS.display,
-      //   theme: { ...convertTheme(lightPlusTheme), inherit: true }
-      // },
+      { 
+        id: Themes.LIGHT_PLUS.value,
+        name: Themes.LIGHT_PLUS.display,
+        theme: lightTheme
+      },
       // not working
       // {
       //   id: Themes.CHB.value,
