@@ -97,3 +97,5 @@ This issue was helpful: [https://github.com/NeekSandhu/monaco-editor-textmate/is
 ## Project
 
 To see this in action in a real project checkout [contrived](https://contrived.dev/)
+
+I am also currently working on a new AI powered, vibe coding editor: [cdbx.ai](https://cdbx.ai)
