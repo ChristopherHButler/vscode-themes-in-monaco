@@ -2,6 +2,8 @@
 
 POC App to get vscode themes working in Monaco
 
+This requires nodejs v10.
+
 
 ## Procedure to Reproduce
 
